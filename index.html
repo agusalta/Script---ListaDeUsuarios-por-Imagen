@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Usuarios</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+    <!-- Enlace al archivo de estilos CSS -->
+  </head>
+  <body>
+    <div class="container">
+      <h1>Lista de Usuarios</h1>
+      <ul class="user-list"></ul>
+      <!-- Este es el elemento donde se agregarán los avatares -->
+    </div>
+
+    <script>
+      fetch("userData.json")
+        .then(response => response.json())
+        .then(data => {
+          const userList = document.querySelector(".user-list");
+          const userNames = data.userNames;
+          const imageFiles = data.imageFiles;
+
+          // Generar avatares y usuarios
+          userNames.forEach((userName, index) => {
+            const li = document.createElement("li");
+            li.classList.add("user-item", "card"); // Aplicamos las clases "user-item" y "card"
+
+            const avatarDiv = document.createElement("div");
+            avatarDiv.classList.add("user-item__image", "avatar"); // Aplicamos las clases "user-item__image" y "avatar"
+
+            const img = document.createElement("img");
+            img.classList.add("avatar-image"); // Aplicamos la clase "avatar-image"
+            img.src = `./src/img/${imageFiles[index]}`;
+            img.alt = userName;
+
+            const infoDiv = document.createElement("div");
+            infoDiv.classList.add("user-item__info"); // Aplicamos la clase "user-item__info"
+
+            const nameHeading = document.createElement("h3");
+            nameHeading.textContent = userName;
+
+            infoDiv.appendChild(nameHeading);
+
+            avatarDiv.appendChild(img);
+            li.appendChild(avatarDiv);
+            li.appendChild(infoDiv);
+
+            userList.appendChild(li);
+          });
+        })
+        .catch(err => {
+          console.error("Error al cargar datos:", err);
+        });
+    </script>
+  </body>
+</html>
