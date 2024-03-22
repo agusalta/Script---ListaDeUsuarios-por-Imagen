@@ -16,7 +16,8 @@ Este script de Node.js automatiza la generación del archivo `userData.json` bas
    ```bash
    npm install
    ```
+
 4. Ejecuta el script para generar el archivo userData.json:
-    node generateUserData.js
+   node generateUserData.js
 5. Para mantener la actualización automática de userData.json, puedes dejar el script en ejecución:
-    node watchImages.js
+   node watchImages.js
